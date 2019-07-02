@@ -1,0 +1,14 @@
+Variables	Values	Time		Scenarios	Reduced
+3		2-5	0.07		50		6
+4		2-5	0.4		192		6
+5		2-5	0.32		384		6
+5		2-5	2496.11		360		9
+6		2-5	timeout			
+6		2-5	10.49		4000		8
+7		2-5	4.2		3200		8
+7		2-5	timeout		4320	
+7		2-5	timeout		1920	
+8		2-5	timeout		4320	
+8		2-5	11718.12	12800		8
+9		2-8	timeout		51200	
+9		2-8			

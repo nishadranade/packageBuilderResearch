@@ -1,0 +1,17 @@
+Variables	Values	Time	Scenarios	Reduced	mean	variance
+3		2-5	41.89	60		9	10	2.5
+3		2-5	983.79	80		10	10	2.5
+3		2-5	9.21	48		8	10	2.5
+3		2-5	27.65	48		9	10	2.5
+3		2-5	timeout	125			10	2.5
+4		3-5	memory	225			10	2.5
+4		3-5	memory	500			10	2.5
+4		3-5	memory	320			10	2.5
+4		3-5	memory	300			10	2.5
+4		2-5	timeout	120			10	2.5
+4		2-5	3.3	48		8	10	2.5
+5		2-5	512.82	96		8	10	2.5
+5		2-5	memory	200			10	2.5
+5		2-5	memory	1000			10	2.5
+5		2-5	memory	960			10	2.5
+7		2-5	timeout	7200			10	2.5
