@@ -35,4 +35,4 @@ def generateDistances(n):
 def generate(n):
     return generateScenarios(n), generateDistances(n)
 
-print(generate(5))
+#print(generate(5))
