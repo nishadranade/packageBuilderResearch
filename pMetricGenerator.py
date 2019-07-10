@@ -31,9 +31,8 @@ def generateDistances(n):
                 distances[j][i] = distances[i][j]
     return distances
 
-# b = generateDistances(3)
-# for i in b:
-#     print(i)
-
+# master method
 def generate(n):
     return generateScenarios(n), generateDistances(n)
+
+print(generate(5))
