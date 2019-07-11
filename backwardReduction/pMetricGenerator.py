@@ -1,6 +1,7 @@
 import numpy as np
 import random
 import copy
+import sys
 
 # method to generate scenarios and their probabilities
 def generateScenarios(n):
@@ -36,4 +37,5 @@ def generate(n):
     return generateScenarios(n), generateDistances(n)
 
 if __name__ == "__main__":
-    print(generate(5))
+    n = sys.argv[1]
+    generate(n)
