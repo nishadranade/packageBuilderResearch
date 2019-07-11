@@ -21,9 +21,10 @@ def generateScenarios(numVar):
             sum2 += s[i]
     return var
 
-dataset = generateScenarios(4)
+if __name__=="__main__":    
+    dataset = generateScenarios(4)
 
-print('[')
-for i in dataset:
-    print(str(i) + ',')
-print(']')
+    print('[')
+    for i in dataset:
+        print(str(i) + ',')
+    print(']')
