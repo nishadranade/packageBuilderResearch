@@ -35,4 +35,5 @@ def generateDistances(n):
 def generate(n):
     return generateScenarios(n), generateDistances(n)
 
-#print(generate(5))
+if __name__ == "__main__":
+    print(generate(5))
