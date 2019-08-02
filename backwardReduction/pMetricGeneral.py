@@ -13,10 +13,6 @@ def eliminate(scenarios, distances):
             if l1 > scenarios[i]*min(distances[i]):
                 l1 = scenarios[i]*min(distances[i])
                 index = i
-    #del distances[i]
-    #for row in distances:
-    #   del row[i]
-    #del scenarios[i]
     return scenarios, distances, index
 
 # method to redistribute the probabilities of the remaining scenarios to add up to 1 again
