@@ -38,6 +38,7 @@ def deleteK(scenarios, distances, k):
         distances = a[1]
     return scenarios, distances
 
+# not called generally, only to test the file individually
 if __name__ == '__main__':
     # given list of scenarios 
     scenarios = [ 0.2, 0.3, 0.1, 0.4]
