@@ -1,2 +1,3 @@
 results.txt
 .editorconfig
+__pycache__/
