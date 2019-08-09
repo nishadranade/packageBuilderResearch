@@ -22,10 +22,32 @@ def preSort(scenarios, distances):
     return sortedDist
 
 # method to eliminate a single scenario
-def eliminate(scenarios, sortedList):
-
+def eliminate(scenarios, sortedDist):
+    rem = float('inf')
+    index = -1
+    for i in range(0, len(scenarios)):
+        if sortedDist[i][0] * scenarios[i] < rem:
+            rem = sortedDist[i][0] * scenarios[i]
+            index = i 
+    return index
 
 
 # method to redistribute the probabilities and fixing the distances matrix, SortedList after elimination
-def redistribute(scenarios, sortedDist, dsitances):
-    
+def redistribute(index, scenarios, sortedDist, distances):
+    closestIndex = sortedDist[index][0]
+    scenarios[closest] += scenarios[index]
+    for sortedList in sortedDist:
+        for i in range(0, len(sortedList)):
+            if sortedList[i][1] == index:
+                sortedList.pop(i)
+                break
+    del scenarios[index]
+    del distances[index]
+    for row in distances:
+        del row[index]
+    return scenarios, distances, sortedDist
+
+
+# method to eliminate k scenarios, one at a time
+def eliminateK(scenarios, distances):
+    return
