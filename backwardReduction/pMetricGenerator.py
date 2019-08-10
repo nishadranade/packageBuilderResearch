@@ -26,7 +26,7 @@ def generateDistances(n):
     for i in range(0, n):
         for j in range(0, n):
             if i == j:
-                distances[i][j] = 100
+                distances[i][j] = 0
             if distances[i][j] == -1 and distances[j][i] == -1:
                 distances[i][j] = 99*random.random()
                 distances[j][i] = distances[i][j]
