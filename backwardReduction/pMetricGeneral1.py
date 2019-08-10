@@ -14,7 +14,7 @@ def preSort(scenarios, distances):
     sortedDist = []
     for i in range(0, len(scenarios)):
         scenarioDist = SortedList()
-        for j in distances[i]:
+        for j in range(0, len(distances[i])):
             if i == j:
                 continue
             scenarioDist.add((distances[i][j], j))
@@ -26,16 +26,16 @@ def eliminate(scenarios, sortedDist):
     rem = float('inf')
     index = -1
     for i in range(0, len(scenarios)):
-        if sortedDist[i][0] * scenarios[i] < rem:
-            rem = sortedDist[i][0] * scenarios[i]
+        if sortedDist[i][0][0] * scenarios[i] < rem:
+            rem = sortedDist[i][0][0] * scenarios[i]
             index = i 
     return index
 
 
 # method to redistribute the probabilities and fixing the distances matrix, SortedList after elimination
 def redistribute(index, scenarios, sortedDist, distances):
-    closestIndex = sortedDist[index][0]
-    scenarios[closest] += scenarios[index]
+    closestIndex = sortedDist[index][0][1]
+    scenarios[closestIndex] += scenarios[index]
     for sortedList in sortedDist:
         for i in range(0, len(sortedList)):
             if sortedList[i][1] == index:
@@ -57,4 +57,11 @@ def eliminateK(scenarios, distances, k):
         scenarios = result[0]
         distances = result[1]
         sortedDistances = result[2]
-    return (scenarios, distances)
+    return scenarios, distances
+
+# not called generally, only to test the file individually
+if __name__ == '__main__':
+    # given list of scenarios 
+    scenarios = [ 0.2, 0.3, 0.1, 0.4]
+    distances = [[0, 11, 12, 13], [11, 0, 4, 5], [12, 4, 0, 6], [13, 5, 6, 0]]
+    print(eliminateK(scenarios, distances, 2))
