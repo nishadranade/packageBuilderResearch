@@ -53,8 +53,8 @@ def eliminateK(scenarios, distances, k):
     sortedDistances = preSort(scenarios, distances)
     for i in range(0, k):
         index = eliminate(scenarios, sortedDistances)
-        bigboi = redistribute(index, scenarios, sortedDistances, distances)    
-        scenarios = bigboi[0]
-        distances = bigboi[1]
-        sortedDistances = bigboi[2]
-    return
+        result = redistribute(index, scenarios, sortedDistances, distances)    
+        scenarios = result[0]
+        distances = result[1]
+        sortedDistances = result[2]
+    return (scenarios, distances)
