@@ -33,7 +33,7 @@ def eliminate(scenarios, sortedDist):
 
 
 # method to redistribute the probabilities and fixing the distances matrix, SortedList after elimination
-def redistribute(index, scenarios, sortedDist, distances):
+def redistribute(index, scenarios, sortedDist):
     closestIndex = sortedDist[index][0][1]
     scenarios[closestIndex] += scenarios[index]
     for sortedList in sortedDist:
@@ -41,11 +41,13 @@ def redistribute(index, scenarios, sortedDist, distances):
             if sortedList[i][1] == index:
                 sortedList.pop(i)
                 break
-    del scenarios[index]
-    del distances[index]
-    for row in distances:
-        del row[index]
-    return scenarios, distances, sortedDist
+            
+    #del scenarios[index]
+    scenarios[index] = float('inf')
+    # del distances[index]
+    # for row in distances:
+    #     del row[index]
+    return scenarios, sortedDist
 
 
 # method to eliminate k scenarios, one at a time
@@ -53,11 +55,15 @@ def eliminateK(scenarios, distances, k):
     sortedDistances = preSort(scenarios, distances)
     for i in range(0, k):
         index = eliminate(scenarios, sortedDistances)
-        result = redistribute(index, scenarios, sortedDistances, distances)    
+        result = redistribute(index, scenarios, sortedDistances)    
         scenarios = result[0]
-        distances = result[1]
-        sortedDistances = result[2]
-    return scenarios, distances
+        #distances = result[1]
+        sortedDistances = result[1]
+    for i in reversed(range(0, len(scenarios))):
+        if scenarios[i] == float('inf'):
+            scenarios.pop(i)
+    return scenarios#, distance
+
 
 # not called generally, only to test the file individually
 if __name__ == '__main__':

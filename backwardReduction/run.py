@@ -1,4 +1,4 @@
-from pMetricGenerator import *
+from generator import *
 from pMetricGeneral import *
 import sys
 
