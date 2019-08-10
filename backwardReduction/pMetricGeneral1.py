@@ -49,5 +49,12 @@ def redistribute(index, scenarios, sortedDist, distances):
 
 
 # method to eliminate k scenarios, one at a time
-def eliminateK(scenarios, distances):
+def eliminateK(scenarios, distances, k):
+    sortedDistances = preSort(scenarios, distances)
+    for i in range(0, k):
+        index = eliminate(scenarios, sortedDistances)
+        bigboi = redistribute(index, scenarios, sortedDistances, distances)    
+        scenarios = bigboi[0]
+        distances = bigboi[1]
+        sortedDistances = bigboi[2]
     return
