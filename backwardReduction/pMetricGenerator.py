@@ -26,7 +26,7 @@ def generateDistances(n):
     for i in range(0, n):
         for j in range(0, n):
             if i == j:
-                distances[i][j] = 0
+                distances[i][j] = 0         # replace the 0 with a 100 if attempting to run runOld.py
             if distances[i][j] == -1 and distances[j][i] == -1:
                 distances[i][j] = 99*random.random()
                 distances[j][i] = distances[i][j]
