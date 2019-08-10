@@ -1,5 +1,5 @@
 from pMetricGenerator import *
-from pMetricGeneral import *
+from pMetricGeneralOld import *
 import sys
 
 # method to nicely print matrices
@@ -26,7 +26,7 @@ if __name__=="__main__":
     print("Distances:")
     printMatrix(data[1])
     print()
-    result = eliminateK(data[0], data[1], k)
+    result = deleteK(data[0], data[1], k)
     print("Reduced Scenarios:")
     print(result[0])
     print("Reduced Scenario Distances Matrix")
