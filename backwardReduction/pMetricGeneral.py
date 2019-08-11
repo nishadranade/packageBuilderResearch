@@ -62,7 +62,10 @@ def eliminateK(scenarios, distances, k):
     for i in reversed(range(0, len(scenarios))):
         if scenarios[i] == float('inf'):
             scenarios.pop(i)
-    return scenarios#, distance
+            for row in distances:
+                del row[i]
+            del distances[i]
+    return scenarios, distances
 
 
 # not called generally, only to test the file individually
