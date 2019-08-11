@@ -41,12 +41,7 @@ def redistribute(index, scenarios, sortedDist):
             if sortedList[i][1] == index:
                 sortedList.pop(i)
                 break
-            
-    #del scenarios[index]
     scenarios[index] = float('inf')
-    # del distances[index]
-    # for row in distances:
-    #     del row[index]
     return scenarios, sortedDist
 
 
