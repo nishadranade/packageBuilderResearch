@@ -32,7 +32,10 @@ def eliminate(scenarios, sortedDist):
     return index
 
 
-# method to redistribute the probabilities and fixing the distances matrix, SortedList after elimination
+# method to redistribute the probabilities and fixing the SortedLists after elimination
+# the distances matrix is not adjusted here, since it is not needed once the SortedLists are made
+# the scenarios[index] is set to infinity, and not removed completely because removing elements from the scenarios list will render the pre-sort useless,
+# since the indices of scenarios will shift
 def redistribute(index, scenarios, sortedDist):
     closestIndex = sortedDist[index][0][1]
     scenarios[closestIndex] += scenarios[index]
