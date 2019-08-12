@@ -1,11 +1,8 @@
 # Optimized implementation of Backward Reduction
-# Store the distances in a list of heaps
 # Need to somehow store the indexes from the distances matrix in the same order as the heap, so that removing and changing distances matrix is easy
-# Data structures to use - Priority queue? x
-
 # use sorted list - make a list of pairs - (distance, index), and sort based on distances
 # ignore a scenario when storing corresponding sorted list since the indexes are already part of the tuple
-# put results in a file
+# put results in a file (do in terminal eg python run.py 100 20 >output.txt)
 
 from sortedcontainers import SortedList
 
@@ -69,6 +66,6 @@ def eliminateK(scenarios, distances, k):
 # not called generally, only to test the file individually
 if __name__ == '__main__':
     # given list of scenarios 
-    scenarios = [ 0.2, 0.3, 0.1, 0.4]
-    distances = [[0, 11, 12, 13], [11, 0, 4, 5], [12, 4, 0, 6], [13, 5, 6, 0]]
+    scenarios = [ 0.2, 0.3, 0.1, 0.3, 0.1]
+    distances = [[0, 11, 12, 13, 20], [11, 0, 4, 5, 21], [12, 4, 0, 6, 22], [13, 5, 6, 0, 23], [20, 21, 22, 23, 0 ]]
     print(eliminateK(scenarios, distances, 2))
