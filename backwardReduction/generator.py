@@ -38,4 +38,6 @@ def generate(n):
 
 if __name__ == "__main__":
     n = int(sys.argv[1])
-    generate(n)
+    a = generate(n)
+    print(a[0])
+    print(a[1])
