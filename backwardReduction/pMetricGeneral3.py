@@ -10,6 +10,11 @@ from sortedcontainers import SortedList
 
 # instead of updating the SortedLists, use counters (one counter per SortedList) as well as a single universal Python set to document which indices 
 # have been eliminated. If works, uses same amount of space, but O(n) instead of O(n^2)
+
+removed = set()
+counter = []
+
+
 def preSort(scenarios, distances):
     sortedDist = []
     for i in range(0, len(scenarios)):
@@ -19,6 +24,7 @@ def preSort(scenarios, distances):
                 continue
             scenarioDist.add((distances[i][j], j))
         sortedDist.append(scenarioDist)
+        counter.append(0)
     return sortedDist
 
 # method to eliminate a single scenario
@@ -26,9 +32,10 @@ def eliminate(scenarios, sortedDist):
     rem = float('inf')
     index = -1
     for i in range(0, len(scenarios)):
-        if sortedDist[i][0][0] * scenarios[i] < rem:
-            rem = sortedDist[i][0][0] * scenarios[i]
+        if i not in removed and sortedDist[i][counter[i]][0] * scenarios[i] < rem:
+            rem = sortedDist[i][counter[i]][0] * scenarios[i]
             index = i 
+    counter[i] += 1
     return index
 
 
@@ -37,13 +44,14 @@ def eliminate(scenarios, sortedDist):
 # the scenarios[index] is set to infinity, and not removed completely because removing elements from the scenarios list will render the pre-sort useless,
 # since the indices of scenarios will shift
 def redistribute(index, scenarios, sortedDist):
-    closestIndex = sortedDist[index][0][1]
+    closestIndex = sortedDist[index][counter[index]][1]
     scenarios[closestIndex] += scenarios[index]
-    for sortedList in sortedDist:
-        for i in range(0, len(sortedList)):
-            if sortedList[i][1] == index:
-                sortedList.pop(i)
-                break
+    # for sortedList in sortedDist:
+    #     for i in range(0, len(sortedList)):
+    #         if sortedList[i][1] == index:
+    #             sortedList.pop(i)
+    #             break
+    removed.add(index)
     scenarios[index] = float('inf')
     return scenarios, sortedDist
 
