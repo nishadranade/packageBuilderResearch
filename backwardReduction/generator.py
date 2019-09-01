@@ -37,5 +37,5 @@ def generate(n):
     return generateScenarios(n), generateDistances(n)
 
 if __name__ == "__main__":
-    n = sys.argv[1]
+    n = int(sys.argv[1])
     generate(n)
