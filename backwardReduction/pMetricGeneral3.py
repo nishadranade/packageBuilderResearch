@@ -12,11 +12,12 @@ from sortedcontainers import SortedList
 # have been eliminated. If works, uses same amount of space, but O(n) instead of O(n^2)
 
 removed = set()
-counter = []
+# counter = []
 
 
 def preSort(scenarios, distances):
     sortedDist = []
+    counter = []
     for i in range(0, len(scenarios)):
         scenarioDist = SortedList()
         for j in range(0, len(distances[i])):
@@ -25,10 +26,10 @@ def preSort(scenarios, distances):
             scenarioDist.add((distances[i][j], j))
         sortedDist.append(scenarioDist)
         counter.append(0)
-    return sortedDist
+    return sortedDist, counter
 
 # method to eliminate a single scenario
-def eliminate(scenarios, sortedDist):
+def eliminate(scenarios, sortedDist, counter, removed):
     rem = float('inf')
     index = -1
     for i in range(0, len(scenarios)):
@@ -43,31 +44,30 @@ def eliminate(scenarios, sortedDist):
 # the distances matrix is not adjusted here, since it is not needed once the SortedLists are made
 # the scenarios[index] is set to infinity, and not removed completely because removing elements from the scenarios list will render the pre-sort useless,
 # since the indices of scenarios will shift
-def redistribute(index, scenarios, sortedDist):
+def redistribute(index, scenarios, sortedDist, counter, removed):
     closestIndex = sortedDist[index][counter[index]][1]
     scenarios[closestIndex] += scenarios[index]
-    # for sortedList in sortedDist:
-    #     for i in range(0, len(sortedList)):
-    #         if sortedList[i][1] == index:
-    #             sortedList.pop(i)
-    #             break
     removed.add(index)
     scenarios[index] = float('inf')
     for i in range(0, len(sortedDist)):
         while sortedDist[counter[i]][1] in removed:
             counter[i] += 1
-    return scenarios, sortedDist
+    return scenarios, sortedDist, counter, removed
 
 
 # method to eliminate k scenarios, one at a time
 def eliminateK(scenarios, distances, k):
-    sortedDistances = preSort(scenarios, distances)
+    removed = set()
+    pre = preSort(scenarios, distances)
+    sortedDistances = pre[0]
+    counter = pre[1]
     for i in range(0, k):
-        index = eliminate(scenarios, sortedDistances)
-        result = redistribute(index, scenarios, sortedDistances)    
+        index = eliminate(scenarios, sortedDistances, counter, removed)
+        result = redistribute(index, scenarios, sortedDistances, counter, removed)    
         scenarios = result[0]
-        #distances = result[1]
         sortedDistances = result[1]
+        counter = result[2]
+        removed = result[3]
     for i in reversed(range(0, len(scenarios))):
         if scenarios[i] == float('inf'):
             scenarios.pop(i)
@@ -90,5 +90,3 @@ if __name__ == '__main__':
     print(eliminateK(scenarios, distances, 3))
 
 # add asserts 
-# add index to removed before you update the distances matrix
-# do the lazy while inside the for
