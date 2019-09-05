@@ -11,8 +11,7 @@ from sortedcontainers import SortedList
 # instead of updating the SortedLists, use counters (one counter per SortedList) as well as a single universal Python set to document which indices 
 # have been eliminated. If works, uses same amount of space, but O(n) instead of O(n^2)
 
-removed = set()
-# counter = []
+# removed = set()
 
 # temporary method for asserting sums of redistributed scenario probabilites is 1
 def sumN(scenarios):
@@ -23,6 +22,7 @@ def sumN(scenarios):
     return sum
 
 def preSort(scenarios, distances):
+    removed = set()
     sortedDist = []
     counter = []
     for i in range(0, len(scenarios)):
@@ -33,7 +33,7 @@ def preSort(scenarios, distances):
             scenarioDist.add((distances[i][j], j))
         sortedDist.append(scenarioDist)
         counter.append(0)
-    return sortedDist, counter
+    return sortedDist, counter, removed
 
 # method to eliminate a single scenario
 def eliminate(scenarios, sortedDist, counter, removed):
@@ -43,7 +43,6 @@ def eliminate(scenarios, sortedDist, counter, removed):
         if i not in removed and sortedDist[i][counter[i]][0] * scenarios[i] < rem:
             rem = sortedDist[i][counter[i]][0] * scenarios[i]
             index = i 
-    # counter[i] += 1
     return index
 
 
@@ -56,8 +55,6 @@ def redistribute(index, scenarios, sortedDist, counter, removed):
     while closestIndex in removed:
         counter[index] += 1
         closestIndex = sortedDist[index][counter[index]][1]
-    # test
-    # assert closestIndex not in removed
     scenarios[closestIndex] += scenarios[index]
     removed.add(index)
     scenarios[index] = float('inf')
@@ -69,18 +66,16 @@ def redistribute(index, scenarios, sortedDist, counter, removed):
 
 # method to eliminate k scenarios, one at a time
 def eliminateK(scenarios, distances, k):
-    removed = set()
     pre = preSort(scenarios, distances)
     sortedDistances = pre[0]
     counter = pre[1]
+    removed = pre[2]
     for i in range(0, k):
         index = eliminate(scenarios, sortedDistances, counter, removed)
         result = redistribute(index, scenarios, sortedDistances, counter, removed)    
         scenarios = result[0]
-        #print(i)
         #print(sumN(scenarios))
         p = sumN(scenarios)
-        # assert sumN(scenarios) == 1
         assert round(p, 6) == 1, p
         sortedDistances = result[1]
         counter = result[2]
@@ -105,6 +100,3 @@ if __name__ == '__main__':
     distances = [[0, 44.51037204867403, 14.123662907165167, 36.188932892464265, 60.57952720766243, 51.96575648526366, 82.03556351686126, 74.34732821138373, 13.341321627045335, 19.70061945175303], [44.51037204867403, 0, 18.786133361779044, 85.5332052277817, 47.12496422598768, 87.17966720630307, 76.99499204799007, 63.975804020417975, 69.2894592815611, 48.38245533616908], [14.123662907165167, 18.786133361779044, 0, 11.422608909464612, 85.53801192299302, 81.1090740849236, 37.324250205400766, 52.90043858828369, 69.33114426447821, 60.19782688101434], [36.188932892464265, 85.5332052277817, 11.422608909464612, 0, 30.080659103321683, 19.17673869436715, 21.32476830123327, 19.549443690261338, 88.40459488249918, 78.78322523416401], [60.57952720766243, 47.12496422598768, 85.53801192299302, 30.080659103321683, 0, 15.534444115572205, 54.946613356319666, 32.81157126684496, 8.228824751204773, 31.506150744245033], [51.96575648526366, 87.17966720630307, 81.1090740849236, 19.17673869436715, 15.534444115572205, 0, 11.215327444144398, 40.83753447437728, 11.002504322164846, 31.203702245142907], [82.03556351686126, 76.99499204799007, 37.324250205400766, 21.32476830123327, 54.946613356319666, 11.215327444144398, 0, 79.51421886498609, 57.013578633168514, 8.075671208669673], [74.34732821138373, 63.975804020417975, 52.90043858828369, 19.549443690261338, 32.81157126684496, 40.83753447437728, 79.51421886498609, 0, 38.39272486660715, 90.35516913231494], [13.341321627045335, 69.2894592815611, 69.33114426447821, 88.40459488249918, 8.228824751204773, 11.002504322164846, 57.013578633168514, 38.39272486660715, 0, 52.90407754758379], [19.70061945175303, 48.38245533616908, 60.19782688101434, 78.78322523416401, 31.506150744245033, 31.203702245142907, 8.075671208669673, 90.35516913231494, 52.90407754758379, 0]]
 
     print(eliminateK(scenarios, distances, 9))
-    # print(eliminateK(scenarios, distances, ))
-
-# add asserts 
