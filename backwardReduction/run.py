@@ -1,5 +1,6 @@
 from generator import *
-from pMetricGeneral import *
+#from pMetricGeneral import *
+from pMetricGeneral3 import *
 import sys
 
 # method to nicely print matrices
@@ -22,12 +23,12 @@ if __name__=="__main__":
     k = int(sys.argv[2])
     data = generate(n)
     print("Scenarios:")
-    print(data[0])
+    # print(data[0])
     print("Distances:")
-    printMatrix(data[1])
+    # printMatrix(data[1])
     print()
     result = eliminateK(data[0], data[1], k)
     print("Reduced Scenarios:")
     print(result[0])
     print("Reduced Scenario Distances Matrix")
-    printMatrix(result[1])
+    # printMatrix(result[1])
