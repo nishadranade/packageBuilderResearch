@@ -1,7 +1,7 @@
-declare a=100
-declare b=5
+declare a=10000
+declare b=1
 
-for i in {0..2}
+for i in {0..12}
 do
     b=$((b*2));
     python run.py $a $b
