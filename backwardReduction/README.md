@@ -10,3 +10,10 @@ run.py runs the implementation of Backward Reduction using the data structure So
 *****
 
 runOld.py is a script that does essentially the same thing, except it runs with O(n^2 * log(n)). It has been kept in order to test correctness of the other implementation. To run it correctly, a change has to be made to generator.py on line 29, where the 0 has to be replaced with a 100. 
+
+
+*****
+
+Run the scripts kScript.sh and nScript.sh using:
+bash kScript.sh > outK.sh 
+bash nScript.sh > outN.sh
