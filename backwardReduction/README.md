@@ -15,5 +15,9 @@ runOld.py is a script that does essentially the same thing, except it runs with 
 *****
 
 Run the scripts kScript.sh and nScript.sh using:
-bash kScript.sh > outK.sh 
-bash nScript.sh > outN.sh
+
+
+bash kScript.sh > outK.txt
+
+
+bash nScript.sh > outN.txt
