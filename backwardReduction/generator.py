@@ -7,10 +7,11 @@ import sys
 def generateScenarios(n):
     scenarios = []
     for i in range(0, n):
-        scenarios.append(np.random.randint(3,12))
-    total = sum(scenarios)
-    for i in range(0, n):
-        scenarios[i] = scenarios[i]/total
+        #scenarios.append(np.random.randint(3,12))
+        scenarios.append(1/n)
+    # total = sum(scenarios)
+    # for i in range(0, n):
+        # scenarios[i] = scenarios[i]/total
     return scenarios
 
 # method to generate the distances matrix
@@ -41,4 +42,4 @@ if __name__ == "__main__":
     n = int(sys.argv[1])
     a = generate(n)
     print(a[0])
-    print(a[1])
+    #print(a[1])
