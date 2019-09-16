@@ -40,6 +40,7 @@ def generate(n):
 if __name__ == "__main__":
     random.seed(2)
     n = int(sys.argv[1])
+    random.seed(5)
     a = generate(n)
     print(a[0])
     #print(a[1])
