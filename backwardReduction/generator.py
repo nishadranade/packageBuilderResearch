@@ -33,8 +33,9 @@ def generateScenarios(n):
 #                 distances[j][i] = distances[i][j]
 #     return distances
 
-def generateValues(n):
-    values = np.random.normal(0, 1, n)
+def generateValues(n, mean_dev, std_dev):
+    # values = np.random.normal(mean_dev, std_dev, n)
+    values = np.random.exponential(0.5, n)
     distances = np.zeros((n, n))
     for i in range(0, n):
         for j in range(0, n):
@@ -43,7 +44,7 @@ def generateValues(n):
 
 # master method
 def generate(n):
-    return generateScenarios(n), generateValues(n)
+    return generateScenarios(n), generateValues(n, 0, 1)
 
 if __name__ == "__main__":
     random.seed(2)
