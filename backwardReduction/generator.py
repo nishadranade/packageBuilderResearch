@@ -39,7 +39,8 @@ def generateValues(n):
     for i in range(0, n):
         for j in range(0, n):
             distances[i][j] = np.linalg.norm(values[i] - values[j])
-    return distances
+    return distances.tolist()
+
 # master method
 def generate(n):
     return generateScenarios(n), generateValues(n)
@@ -49,5 +50,5 @@ if __name__ == "__main__":
     n = int(sys.argv[1])
     random.seed(5)
     a = generate(n)
-    #print(a[0])
-    print(a[1])
+    scenario_probabilies = a[0]
+    distances = a[1]
