@@ -4,14 +4,16 @@ from matplotlib import pyplot as plt
 
 input = sys.argv[1]
 
-with open(input) as file:
+with open(input, 'r') as file:
     data = file.read()
 
 data = data.split('\n')
+data = data[:len(data)-1]           #when bash nScript.sh > outN.txt or kScript.sh > outK.txt, there is an extra line after the last line
+#print('Size: {}'.format(len(data)))
 
-numScenario = [float(row.split(', ')[0]) for row in data]
+numScenario = [int(row.split(', ')[0]) for row in data]
 
-numScenarioEliminated = [float(row.split(', ')[1]) for row in data]
+numScenarioEliminated = [int(row.split(', ')[1]) for row in data]
 
 time = [float(row.split(', ')[2]) for row in data]
 
@@ -29,7 +31,7 @@ time_min = min(time)
 time_interval = time_max//len(time)
 
 # Number of Scenarios vs. Time
-plt.subplot(2, 2, 1)
+plt.subplot(1, 2, 1)
 plt.scatter(numScenario, time)
 plt.plot(numScenario, time)
 
@@ -46,7 +48,7 @@ plt.grid()
 
 
 # Number of Scenarios Eliminated vs. Time
-plt.subplot(2, 2, 2)
+plt.subplot(1, 2, 2)
 plt.scatter(numScenarioEliminated, time)
 plt.plot(numScenarioEliminated, time)
 plt.title('Number of Scenarios Eliminated vs. Time')
