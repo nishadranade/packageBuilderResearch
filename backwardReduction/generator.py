@@ -3,6 +3,10 @@ import random
 import copy
 import sys
 
+
+#*** Add support for vectors of random variables, not just one random variable 
+# add support for uniform distribution, normal distribution as well as exponential
+
 # method to generate scenarios and their probabilities
 def generateScenarios(n):
     scenarios = []
@@ -33,10 +37,12 @@ def generateScenarios(n):
 #                 distances[j][i] = distances[i][j]
 #     return distances
 
-def generateValues(n, mean_dev, std_dev):
-    # values = np.random.normal(mean_dev, std_dev, n)
+def generateValues(n, mean, std_dev):
+    # values = np.random.normal(mean, std_dev, n)
+    # add uniform distribution support
     values = np.random.exponential(0.5, n)
     distances = np.zeros((n, n))
+
     for i in range(0, n):
         for j in range(0, n):
             distances[i][j] = np.linalg.norm(values[i] - values[j])
