@@ -5,7 +5,7 @@
 # put results in a file (do in terminal eg python run.py 100 20 >output.txt)
 
 from sortedcontainers import SortedList
-
+import numpy as np
 # method to create the presorted SortedLists based on distances for every scenario 
 
 # instead of updating the SortedLists, use counters (one counter per SortedList) as well as a single universal Python set to document which indices 
@@ -65,7 +65,7 @@ def redistribute(index, scenarios, sortedDist, counter, removed):
 
 
 # method to eliminate k scenarios, one at a time
-def eliminateK(scenarios, distances, k):
+def eliminateK(scenarios, distances, k, values):
     pre = preSort(scenarios, distances)
     sortedDistances = pre[0]
     counter = pre[1]
@@ -80,13 +80,15 @@ def eliminateK(scenarios, distances, k):
         sortedDistances = result[1]
         counter = result[2]
         removed = result[3]
+    print(type(values))
     for i in reversed(range(0, len(scenarios))):
         if scenarios[i] == float('inf'):
             scenarios.pop(i)
             for row in distances:
                 del row[i]
             del distances[i]
-    return scenarios, distances
+            values = np.delete(values, i, axis=0)
+    return scenarios, distances, values
 
 
 # not called generally, only to test the file individually

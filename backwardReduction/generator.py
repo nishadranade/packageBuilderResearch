@@ -27,7 +27,7 @@ def generateValues(n, mean1, std1, mean2, std2):
     for i in range(0, n):
         for j in range(0, n):
             distances[i][j] = np.linalg.norm(values[i] - values[j])
-    return distances.tolist()
+    return values, distances.tolist()
 
 # master method
 def generate(n, m1, std_1, m2, std_2):
