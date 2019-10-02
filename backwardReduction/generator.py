@@ -3,10 +3,6 @@ import random
 import copy
 import sys
 
-
-#*** Add support for vectors of random variables, not just one random variable 
-# add support for uniform distribution, normal distribution as well as exponential
-
 # method to generate scenarios and their probabilities
 def generateScenarios(n):
     scenarios = []
@@ -18,7 +14,36 @@ def generateScenarios(n):
         # scenarios[i] = scenarios[i]/total
     return scenarios
 
-# method to generate the distances matrix ***OBSOLETE***
+
+def generateValues(n, mean1, std1, mean2, std2):
+    # values = np.random.normal(mean, std_dev, n)
+    # add uniform distribution support
+
+    values1 = np.random.normal(mean1, std1, n)
+    values2 = np.random.normal(mean2, std2, n)
+    values = np.array([values1, values2])
+    values = np.transpose(values)
+    distances = np.zeros((n, n))
+    for i in range(0, n):
+        for j in range(0, n):
+            distances[i][j] = np.linalg.norm(values[i] - values[j])
+    return distances.tolist()
+
+# master method
+def generate(n, m1, std_1, m2, std_2):
+    return generateScenarios(n), generateValues(n, m1, std_1, m2, std_2)
+
+if __name__ == "__main__":
+    random.seed(2)
+    n = int(sys.argv[1])
+    random.seed(5)
+    a = generate(n)
+    scenario_probabilies = a[0]
+    distances = a[1]
+
+
+
+# old method to generate the distances matrix ***OBSOLETE***
 # def generateDistances(n):
 #     distances = []
 #     # initialize all distances to be -1
@@ -36,26 +61,3 @@ def generateScenarios(n):
 #                 distances[i][j] = 99*random.random()
 #                 distances[j][i] = distances[i][j]
 #     return distances
-
-def generateValues(n, mean, std_dev):
-    # values = np.random.normal(mean, std_dev, n)
-    # add uniform distribution support
-    values = np.random.exponential(0.5, n)
-    distances = np.zeros((n, n))
-
-    for i in range(0, n):
-        for j in range(0, n):
-            distances[i][j] = np.linalg.norm(values[i] - values[j])
-    return distances.tolist()
-
-# master method
-def generate(n):
-    return generateScenarios(n), generateValues(n, 0, 1)
-
-if __name__ == "__main__":
-    random.seed(2)
-    n = int(sys.argv[1])
-    random.seed(5)
-    a = generate(n)
-    scenario_probabilies = a[0]
-    distances = a[1]

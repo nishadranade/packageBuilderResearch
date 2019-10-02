@@ -23,7 +23,7 @@ if __name__=="__main__":
     start = time.time()
     n = int(sys.argv[1])
     k = int(sys.argv[2])
-    data = generate(n)
+    data = generate(n, 0, 1, 5, 2)
     # print("Scenarios:")
     # print(data[0])
     # print("Distances:")
