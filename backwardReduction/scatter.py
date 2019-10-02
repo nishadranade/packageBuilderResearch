@@ -2,6 +2,7 @@ import sys
 import numpy as np
 from matplotlib import pyplot as plt
 
+#add way to display graph inline without blocking the script
 #scenarios_array: array of tuples 
 def scatterPlot(scenarios_array):
 
