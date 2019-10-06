@@ -21,3 +21,9 @@ bash kScript.sh > outK.txt
 
 
 bash nScript.sh > outN.txt
+
+
+*****
+
+To run scatter.plot, you need to "pip install scipy"
+
