@@ -3,7 +3,7 @@
 # use sorted list - make a list of pairs - (distance, index), and sort based on distances
 # ignore a scenario when storing corresponding sorted list since the indexes are already part of the tuple
 # put results in a file (do in terminal eg python run.py 100 20 >output.txt)
-
+from scatter import scatterPlot
 from sortedcontainers import SortedList
 import numpy as np
 # method to create the presorted SortedLists based on distances for every scenario 
@@ -80,7 +80,11 @@ def eliminateK(scenarios, distances, k, values):
         sortedDistances = result[1]
         counter = result[2]
         removed = result[3]
-    print(type(values))
+        if i == k//4 or i == 3*k//4:
+            valTemp = np.delete(values, list(removed), axis=0)
+            scatterPlot(valTemp)
+    
+
     for i in reversed(range(0, len(scenarios))):
         if scenarios[i] == float('inf'):
             scenarios.pop(i)
