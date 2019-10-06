@@ -1,6 +1,7 @@
 from generator import *
 from pMetricGeneral3 import *
 from scatter import scatterPlot
+from matplotlib import pyplot as plt
 import sys
 import time
 
@@ -21,7 +22,8 @@ if __name__=="__main__":
     # print("Distances:")
     # printMatrix(data[1])
     # print()
-    scatterPlot(data[1][0])
+    #scatterPlot(data[1][0])
+    original = data[1][0]
     result = eliminateK(data[0], data[1][1], k, data[1][0])
     end = time.time()
     runTime = end - start
@@ -30,4 +32,6 @@ if __name__=="__main__":
     #print(result[0])
     # print("Reduced Scenario Distances Matrix")
     # printMatrix(result[1])
-    scatterPlot(result[2])
+    #scatterPlot(result[2])
+    reduced = result[2]
+    scatterPlot(original, reduced)
