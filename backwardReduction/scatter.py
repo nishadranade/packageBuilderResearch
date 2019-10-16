@@ -43,12 +43,26 @@ def scatterPlot(scenarios_array_1, probability_1, scenarios_array_2, probability
     
 
 #values: array of tuples 
-def singleScatterPlot(values, probability, n, k):
+def singleScatterPlot(values, probability, n, k, min_prob, max_prob):
+    plt.clf()
 
     x = [value[0] for value in values]
     y = [value[1] for value in values]
 
-    plt.scatter(x, y, c=probability, s=50, edgecolors='')
+    #min_p to max_p should be across plot 
+    min_p = min_prob #np.min(probability)
+    max_p = max_prob #np.max(probability)
+
+    #for i from 0 to n
+    for i in range(len(x)): 
+        a = 2*probability[i] + 0.5
+        if (max_p == min_p):
+            a = 0.25
+        else:
+            a = ((probability[i]-min_p)*0.75)/(max_p - min_p) + 0.25       #maybe play with range with 0.25 to 1
+        #NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin
+        #print(a)
+        plt.scatter(x[i], y[i], s=150*a, c='blue', edgecolors='', alpha=a) #c=probability #for loop probability and call scatter
 
     plt.title('{} Scenarios with {} Scenarios Reduced'.format(n, k))
     plt.xlabel('Random var_1')
@@ -56,7 +70,7 @@ def singleScatterPlot(values, probability, n, k):
 
     plt.xticks(rotation=45, ha="right")
     plt.yticks()
-    plt.savefig('plots/n-{}_k-{}_.png'.format(n, k))
+    plt.savefig('plots/n1-{}_k-{}_.png'.format(n, k))
     #plt.show()
 
         
