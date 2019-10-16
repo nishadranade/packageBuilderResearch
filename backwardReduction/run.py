@@ -17,12 +17,22 @@ def savePlot(data, n, k):
 
     ratio = k / n
     interval = int((ratio / 3)*n)
+
+    min_p = 0
+    max_p = 0
+    eliminated_results = []
     for i in range(0, k+1, interval):
         result = eliminateK(data_1[0], data_1[1][1], i, data_1[1][0])    #fix
-        reduced_values = result[2]
-        reduced_probabilities = result[0]
-        singleScatterPlot(reduced_values, reduced_probabilities, n, i)
+        reduced_values = copy.deepcopy(result[2])           #result[2]
+        reduced_probabilities = copy.deepcopy(result[0])    #result[0]
+        eliminated_results.append((reduced_values, reduced_probabilities, i))
+        min_p = min(min_p, min(reduced_probabilities))
+        max_p = max(max_p, max(reduced_probabilities))
+        #singleScatterPlot(reduced_values, reduced_probabilities, n, i)
         data_1 = copy.deepcopy(temp)
+    
+    for scenario in eliminated_results:
+        singleScatterPlot(scenario[0], scenario[1], n, scenario[2], min_p, max_p)
 
 
 # Super script to generate scenarios and distances and then do backward reduction on them
