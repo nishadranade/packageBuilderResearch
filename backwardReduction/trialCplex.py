@@ -2,11 +2,17 @@ import numpy as np
 import random
 import cplex 
 import scipy as sp
+from scipy.stats import norm
 
 random.seed(100)
 
 t = np.random.normal(0, 1, 3)
 p = 0.9
+
+
+# pass in a list of variables each with provided means and standard deviations, as well as v and p
+
+
 
 # let us for simplicity assume that all t_i are std normal
 # all x_i are binary
@@ -36,11 +42,16 @@ problem.objective.set_sense(problem.objective.sense.minimize)
 pairs = zip(names, objective)
 problem.objective.set_linear(pairs)
 
-# print(t)
-lin_constraint = [["x_1", "x_2", "x_3", "c" ], [1, 2, 3, -1.285]]
+p = 0.9
+phi_p = norm.ppf(p)
 
-problem.linear_constraints.add(lin_expr=[lin_constraint], rhs=[-1], senses='G')
-# rhs = 5
+# print(t)
+lin_constraint = [["x_1", "x_2", "x_3", "c" ], [1, 2, 3, -phi_p]]
+
+v = -1
+
+problem.linear_constraints.add(lin_expr=[lin_constraint], rhs=[v], senses='G')
+
 
 constraint_senses = ["G"]
 
