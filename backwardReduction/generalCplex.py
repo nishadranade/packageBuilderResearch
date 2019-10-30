@@ -57,6 +57,12 @@ def solve_cplex(mean, std_deviation, v, p):
     #v = -1
     problem.linear_constraints.add(lin_expr=[lin_constraint], rhs=[v], senses='G')
 
+
+    # linear constraint to limit the number of 1s in the objective
+    cons = np.ones(num_decision_var).tolist()
+    lin_constraint2 = [decision_variables, cons]
+    problem.linear_constraints.add(lin_expr=[lin_constraint2], rhs=[10], senses='L' )
+
     #Quadratic Constraint
     #quad_constraint = cplex.SparseTriple(ind1 = ["x_1", "x_2", "x_3", "c" ], ind2= ["x_1", "x_2", "x_3", "c" ], val = [1,1,1,-1])  
     quad_val = ti_sigma
