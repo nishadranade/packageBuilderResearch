@@ -87,7 +87,7 @@ if __name__=='__main__':
 
     import numpy as np
     mean = np.random.random(1000).tolist()
-    std_deviation = np.abs(1+np.random.random(1000)).tolist()
+    std_deviation = np.abs(2+np.random.random(1000)).tolist()
 
     solve_cplex(mean, std_deviation, v, p)
 
