@@ -4,12 +4,12 @@ import scipy.stats import norm
 import sys
 
 # ** make super class that will generate, reduce, pass the reduced stuff
-# to cplex 
+# to cplex
 
-# change the function to take nxm array as input, which is assumed to be 
+# change the function to take nxm array as input, which is assumed to be
 # reduced scenarios. Each of the m scenarios will also have a probability
 # associated with them, which will be passed in as a vector of probabilities
-# pass in the "actual" means 
+# pass in the "actual" means
 
 def generateData(n, m):
     # generate m samples each for n normal distributions
@@ -35,8 +35,8 @@ def solve_cplex(v, p, n, data, probs, means):
 # add M y_js which are indicator constraints (type binary)
     problem.variables.add(types = [problem.variables.type.binary]*m)
 
-# add the indicator constraints on y_js 
-    for j in range(0, m):   
+# add the indicator constraints on y_js
+    for j in range(0, m):
         problem.indicator_constraints.add(
             indvar=n+j, complemented=0, rhs=v, sense="G",
             lin_expr=cplex.SparsePair(ind=list(range(0,n))), val=data[:,j].tolist())
@@ -51,3 +51,5 @@ def solve_cplex(v, p, n, data, probs, means):
     problem.objective.set_linear(pairs)
 
     problem.solve()
+
+    return problem.solution.get_values(), problem.solution.get_objective_value()
