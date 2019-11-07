@@ -112,7 +112,7 @@ def eliminate_K(scenarios, distances, k, values):
         removed = result[3]
         if i == k//4 or i == 3*k//4:
             valTemp = np.delete(values, list(removed), axis=0)
-            scatterPlot(valTemp)
+            # scatterPlot(valTemp)
 
 
     for i in reversed(range(0, len(scenarios))):

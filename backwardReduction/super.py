@@ -28,7 +28,8 @@ def reductionStage(n, m):
             np.delete(means, i)
             np.delete(std_devs, i)
     # temporary
-    v = 10, p = 0.7
+    v = 10
+    p = 0.7
 
     var_vals, obj_vals = solve_cplex(v, p, n, values, probs, means)
 

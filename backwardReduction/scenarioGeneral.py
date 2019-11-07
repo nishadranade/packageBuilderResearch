@@ -1,6 +1,6 @@
 import numpy as np
 import cplex
-import scipy.stats import norm
+from scipy.stats import norm
 import sys
 
 # ** make super class that will generate, reduce, pass the reduced stuff
