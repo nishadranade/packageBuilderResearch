@@ -14,7 +14,6 @@ def generateScenarios(n):
         # scenarios[i] = scenarios[i]/total
     return scenarios
 
-
 def generateValues(n, mean1, std1, mean2, std2):
     # values = np.random.normal(mean, std_dev, n)
     # add uniform distribution support
@@ -32,6 +31,24 @@ def generateValues(n, mean1, std1, mean2, std2):
 # master method
 def generate(n, m1, std_1, m2, std_2):
     return generateScenarios(n), generateValues(n, m1, std_1, m2, std_2)
+
+
+# method to generate the nxm matrix for super.py
+def generateMatrix(n, m):
+    #8 2
+    means = np.random.normal(8, 2, n)
+    std_devs = np.ones(n)
+    values = np.random.normal(means, std_devs, (m, n))
+    values = np.transpose(values)
+    probs = np.ones(m)
+    probs = probs * 1/m
+    distances = np.zeros((m,m))
+    for i in range(m):
+        for j in range(m):
+            distances[i][j] = np.linalg.norm(values[:,i] - values[:, j])
+    return values, distances, means, std_devs, probs
+
+
 
 if __name__ == "__main__":
     random.seed(2)
