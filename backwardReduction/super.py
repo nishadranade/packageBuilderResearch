@@ -23,7 +23,7 @@ def reductionStage(n, m):
     probs,distances,values,removed = eliminate_K(probs,distances,n//2,values)
 
     # update the means and standard deviation
-    for i in reversed(len(original_means)):
+    for i in reversed(range(len(original_means))):
         if i in removed:
             np.delete(means, i)
             np.delete(std_devs, i)

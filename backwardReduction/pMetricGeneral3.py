@@ -117,10 +117,13 @@ def eliminate_K(scenarios, distances, k, values):
 
     for i in reversed(range(0, len(scenarios))):
         if scenarios[i] == float('inf'):
-            scenarios.pop(i)
+            # scenarios.pop(i)
+            scenarios = np.delete(scenarios, i)
+            print(type(distances))
             for row in distances:
-                del row[i]
-            del distances[i]
+                print(row.shape)
+                row = np.delete(row, i)
+            distances = np.delete(distances, i)
             values = np.delete(values, i, axis=0)
     return scenarios, distances, values, removed
 
