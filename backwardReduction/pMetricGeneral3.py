@@ -111,7 +111,7 @@ def eliminate_K(scenarios, distances, k, values):
         counter = result[2]
         removed = result[3]
         if i == k//4 or i == 3*k//4:
-            print(values.shape)
+            # print(values.shape)
             valTemp = np.delete(values, list(removed), axis=1)
             # scatterPlot(valTemp)
 
