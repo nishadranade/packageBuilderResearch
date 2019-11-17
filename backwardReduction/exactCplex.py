@@ -11,12 +11,22 @@ def extract_data(file_name):
     
     file = file.split('\n')
 
-    mean = [row.split(', ')[0] for row in file]
-    std_dev = [row.split(', ')[1] for row in file]
+    mean = []
+    std_dev = []
+    for row in file:
+        if row.strip() == "":
+            continue
+        m, s = row.split(",")
+        #print(m, s)
+        mean.append(float(m))
+        std_dev.append(float(s))
+
+    #mean = [float(row.split(',')[0]) for row in file]
+    #std_dev = [float(row.split(',')[1]) for row in file]
 
     return (mean, std_dev)
 
-def solve_cplex(mean, std_deviation, v, p):
+def solve_exact_cplex(mean, std_deviation, v, p):
 
     problem = cplex.Cplex()
 
@@ -73,8 +83,14 @@ def solve_cplex(mean, std_deviation, v, p):
 
     #Solve
     problem.solve()
-    print(problem.solution.get_values())
-    print(problem.solution.get_objective_value())
+    #print(problem.solution.get_values())
+    #print(problem.solution.get_objective_value())
+
+    var_vals = problem.solution.get_values()
+    obj_vals = problem.solution.get_objective_value()
+
+    return var_vals, obj_vals
+
 
 if __name__=='__main__':
     #file_name = sys.argv[1]     #CSV file name
@@ -87,7 +103,7 @@ if __name__=='__main__':
 
     import numpy as np
     mean = np.random.random(1000).tolist()
-    std_deviation = np.abs(2+np.random.random(1000)).tolist()
+    std_deviation = np.abs(2+np.random.random(1000)).tolist() 
 
-    solve_cplex(mean, std_deviation, v, p)
+    solve_exact_cplex(mean, std_deviation, v, p)
 

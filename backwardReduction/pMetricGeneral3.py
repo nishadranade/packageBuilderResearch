@@ -111,7 +111,8 @@ def eliminate_K(scenarios, distances, k, values):
         counter = result[2]
         removed = result[3]
         if i == k//4 or i == 3*k//4:
-            valTemp = np.delete(values, list(removed), axis=0)
+            print(values.shape)
+            valTemp = np.delete(values, list(removed), axis=1)
             # scatterPlot(valTemp)
 
     #FIXME
@@ -127,7 +128,7 @@ def eliminate_K(scenarios, distances, k, values):
             for row in distances_2D_array:
                 del row[i]
             del distances_2D_array[i]
-            values = np.delete(values, i, axis=0)
+            values = np.delete(values, i, axis=1)
 
     scenarios = np.asarray(scenarios_array)
     distances = np.asarray(distances_2D_array)

@@ -17,13 +17,13 @@ def generateData(n, m):
     return data
 
 
-def solve_cplex(v, p, n, data, probs, means):
+def solve_scenario_cplex(v, p, n, m, data, probs, means):
     # data = generateData(n, m)
     d = np.asarray(data)
     # T_i = np.sum(d, axis = 1)
 
-    m = data.shape[0]   #data.shape[1]  --> need to be shape[0] because transposing does not take the number of columns
-    assert m == len(probs)
+    #m = data.shape[1]   #data.shape[1]  --> need to be shape[0] because transposing does not take the number of columns
+    assert m == len(probs), (m, len(probs))
 
     problem = cplex.Cplex()
 
@@ -39,7 +39,12 @@ def solve_cplex(v, p, n, data, probs, means):
     for j in range(0, m):
         problem.indicator_constraints.add(
             indvar=n+j, complemented=0, rhs=v, sense="G",
-            lin_expr=cplex.SparsePair(ind=list(range(0,n)), val=data[j,:].tolist()))        #changed data[:,j] to data[j,:]
+            lin_expr=cplex.SparsePair(ind=list(range(0,n)), val=data[:,j].tolist()))        #changed data[:,j] to data[j,:]
+
+# linear constraint to limit the number of 1s in the objective
+    cons = np.ones(n).tolist()
+    lin_constraint2 = [range(n), cons]
+    problem.linear_constraints.add(lin_expr=[lin_constraint2], rhs=[10], senses='L' )
 
 # add last constraint that avg of y_j GE p
     problem.linear_constraints.add(lin_expr=[[range(n,n+m), probs.tolist()]],

@@ -34,19 +34,20 @@ def generate(n, m1, std_1, m2, std_2):
 
 
 # method to generate the nxm matrix for super.py
-def generateMatrix(n, m):
+def generateMatrix(n, m, means, std_devs, seed):
     #8 2
-    means = np.random.normal(8, 2, n)
-    std_devs = np.ones(n)
-    values = np.random.normal(means, std_devs, (m, n))
+    # means = np.random.normal(8, 2, n)
+    # std_devs = np.ones(n)
+    np.random.seed(seed)
+    values = np.random.normal(means, 1, (m, n))
     values = np.transpose(values)
-    probs = np.ones(m)
-    probs = probs * 1/m
+    probs = np.ones(m) / m
+    # probs = probs * 1/m
     distances = np.zeros((m,m))
     for i in range(m):
         for j in range(m):
             distances[i][j] = np.linalg.norm(values[:,i] - values[:, j])
-    return values, distances, means, std_devs, probs
+    return values, distances, probs
 
 
 
