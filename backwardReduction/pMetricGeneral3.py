@@ -115,6 +115,7 @@ def eliminate_K(scenarios, distances, k, values):
             valTemp = np.delete(values, list(removed), axis=1)
             # scatterPlot(valTemp)
 
+
     #FIXME
     #converting scenarios from numpy obj to array to make the code work
     scenarios_array = scenarios.tolist()
@@ -132,6 +133,7 @@ def eliminate_K(scenarios, distances, k, values):
 
     scenarios = np.asarray(scenarios_array)
     distances = np.asarray(distances_2D_array)
+
     return scenarios, distances, values, removed
 
 
