@@ -1,6 +1,6 @@
 n = 21
 m = 50
-k = 25
+k = 0
 v = 10.0
 p = 0.9
 method: exact
@@ -13,4 +13,4 @@ CPLEX solution values: [-0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0
 
 CPLEX solution objective value: 43.703511263608405
 
-Runtime: 0.029732704162597656
+Runtime: 0.023176908493041992
