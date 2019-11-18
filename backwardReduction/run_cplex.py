@@ -45,6 +45,11 @@ def run(n, m, k, v, p, input_file, method, seed):
     print(var_vals)
     print(obj_vals)
 
+    write_to_file(n, m, k, v, p, method, mean, std_dev, var_vals, obj_vals, run_time)
+
+    return obj_vals, run_time
+
+def write_to_file(n, m, k, v, p, method, mean, std_dev, var_vals, obj_vals, run_time):
     file = open("CPLEX Tests/test_n={}_m={}_k={}_{}.txt".format(n, m, k, method), "w")
     file.writelines("n = {}\n".format(n))
     file.writelines("m = {}\n".format(m))
@@ -58,8 +63,6 @@ def run(n, m, k, v, p, input_file, method, seed):
     file.writelines("CPLEX solution objective value: {}\n\n".format(obj_vals))
     file.writelines("Runtime: {}\n".format(run_time))
     file.close()
-
-    return obj_vals, run_time
 
 def plot(n, m, v, p, input_file, seed):
     
