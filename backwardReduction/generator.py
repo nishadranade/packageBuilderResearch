@@ -50,14 +50,25 @@ def generateMatrix(n, m, means, std_devs, seed):
     return values, distances, probs
 
 
+# method to generate means and standard deviations and put them in a text file in the specified format
+def generateParameters(n):
+    means = np.random.normal(50, 5, n)
+    std_devs = np.random.normal(5, 2, n)
+    std_devs = np.absolute(std_devs)
+
+    file = open("parameters/data_n={}.txt".format(n), "w")  
+
+    for i, j in zip(means, std_devs):
+        file.writelines(str(i) + ', ' + str(j) + '\n')
+    # file.writelines(" = {}\n".format(n))
+    file.close()
+
 
 if __name__ == "__main__":
     random.seed(2)
     n = int(sys.argv[1])
     random.seed(5)
-    a = generate(n)
-    scenario_probabilies = a[0]
-    distances = a[1]
+    generateParameters(n)
 
 
 
