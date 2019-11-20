@@ -6,6 +6,7 @@ from generator import*
 import sys
 import time
 from matplotlib import pyplot as plt
+from scipy.stats import norm
 
 def run(n, m, k, v, p, input_file, method, seed):
     # n = int(sys.argv[1])
@@ -122,6 +123,12 @@ def plot(n, m, v, p, input_file, seed):
     plt.xticks(rotation=45, ha="right")
     plt.yticks()
     plt.grid()
+
+    #Feasibility of solution
+    # mu = exact_result[0]        #obj_val
+    # #sigma = exact_result[0]
+    # p_surplus = 1 - norm.cdf(v, mu, sigma)
+
 
     plt.show()
 
