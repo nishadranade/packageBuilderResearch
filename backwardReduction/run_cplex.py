@@ -29,6 +29,8 @@ def run(n, m, k, v, p, input_file, method, seed):
 
     start_time = time.time()
 
+    print('before cplex')
+
     if method == "exact":
         # Run exact
         var_vals, obj_vals = solve_exact_cplex(mean, std_dev, v, p)
@@ -40,6 +42,8 @@ def run(n, m, k, v, p, input_file, method, seed):
 
     end_time = time.time()
     run_time = end_time - start_time    #need to recompute run_time correctly for scenarios case
+
+    print('after cplex')
 
     #should store in file including the input
     #output file must have format that have arguments and outputs, start times, end times
