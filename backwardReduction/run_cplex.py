@@ -50,7 +50,7 @@ def run(n, m, k, v, p, input_file, method, seed):
     print(var_vals)
     print(obj_vals)
 
-    write_to_file(n, m, k, v, p, method, mean, std_dev, var_vals, obj_vals, run_time)
+    #write_to_file(n, m, k, v, p, method, mean, std_dev, var_vals, obj_vals, run_time)
 
     return obj_vals, run_time
 
@@ -146,5 +146,5 @@ if __name__ == "__main__":
     input_file = sys.argv[6]
     method = sys.argv[7]
     seed = int(sys.argv[8])
-    #run(n, m, k, v, p, input_file, method, seed)
-    plot(n, m, v, p, input_file, seed)
+    run(n, m, k, v, p, input_file, method, seed)
+    #plot(n, m, v, p, input_file, seed)
