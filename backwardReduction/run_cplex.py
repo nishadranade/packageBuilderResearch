@@ -5,7 +5,7 @@ from pMetricGeneral3 import*
 from generator import*
 import sys
 import time
-from matplotlib import pyplot as plt
+#from matplotlib import pyplot as plt
 from scipy.stats import norm
 
 def run(n, m, k, v, p, input_file, method, seed):
@@ -69,72 +69,72 @@ def write_to_file(n, m, k, v, p, method, mean, std_dev, var_vals, obj_vals, run_
     file.writelines("Runtime: {}\n".format(run_time))
     file.close()
 
-def plot(n, m, v, p, input_file, seed):
+# def plot(n, m, v, p, input_file, seed):
     
-    exact_result = run(n, m, 0, v, p, input_file, "exact", seed)
+#     exact_result = run(n, m, 0, v, p, input_file, "exact", seed)
 
-    scenarios_obj_vals = []
-    scenarios_time = []
-    k = []
+#     scenarios_obj_vals = []
+#     scenarios_time = []
+#     k = []
 
-    for i in range(0, m, m//10):
-        k.append(i)
-        scenarios_result = run(n, m, i, v, p, input_file, "scenarios", seed)
-        scenarios_obj_vals.append(scenarios_result[0])
-        scenarios_time.append(scenarios_result[1])
+#     for i in range(0, m, m//10):
+#         k.append(i)
+#         scenarios_result = run(n, m, i, v, p, input_file, "scenarios", seed)
+#         scenarios_obj_vals.append(scenarios_result[0])
+#         scenarios_time.append(scenarios_result[1])
     
 
-    size = len(scenarios_obj_vals)      #to have the same number of elements for exact_obj_vals and exact_time as that of scenarios_obj_vals and scenarios_time
+#     size = len(scenarios_obj_vals)      #to have the same number of elements for exact_obj_vals and exact_time as that of scenarios_obj_vals and scenarios_time
 
-    exact_obj_vals = [exact_result[0]] * size
-    exact_time = [exact_result[1]] * size
+#     exact_obj_vals = [exact_result[0]] * size
+#     exact_time = [exact_result[1]] * size
 
-    print('exact_obj_vals {}'.format(exact_obj_vals))
-    print('exact_time {}'.format(exact_time))
-    print('scenarios_obj_vals {}'.format(scenarios_obj_vals))
-    print('scenarios_time {}'.format(scenarios_time))           
+#     print('exact_obj_vals {}'.format(exact_obj_vals))
+#     print('exact_time {}'.format(exact_time))
+#     print('scenarios_obj_vals {}'.format(scenarios_obj_vals))
+#     print('scenarios_time {}'.format(scenarios_time))           
 
-    #Obj_vals vs. k
-    plt.subplot(1, 2, 1)
-    plt.scatter(k, exact_obj_vals)
-    plt.plot(k, exact_obj_vals)
+#     #Obj_vals vs. k
+#     plt.subplot(1, 2, 1)
+#     plt.scatter(k, exact_obj_vals)
+#     plt.plot(k, exact_obj_vals)
 
-    plt.scatter(k, scenarios_obj_vals)
-    plt.plot(k, scenarios_obj_vals)
+#     plt.scatter(k, scenarios_obj_vals)
+#     plt.plot(k, scenarios_obj_vals)
 
-    plt.legend(["Exact", "Scenarios"], loc='upper right')
+#     plt.legend(["Exact", "Scenarios"], loc='upper right')
 
-    plt.title('Obj_vals vs. k')
-    plt.xlabel('k')
-    plt.ylabel('Objective Values')
-    plt.xticks(rotation=45, ha="right")
-    plt.yticks()
-    plt.grid()
+#     plt.title('Obj_vals vs. k')
+#     plt.xlabel('k')
+#     plt.ylabel('Objective Values')
+#     plt.xticks(rotation=45, ha="right")
+#     plt.yticks()
+#     plt.grid()
 
-    #Times vs. k
-    plt.subplot(1, 2, 2)
-    plt.scatter(k, exact_time)
-    plt.plot(k, exact_time)
+#     #Times vs. k
+#     plt.subplot(1, 2, 2)
+#     plt.scatter(k, exact_time)
+#     plt.plot(k, exact_time)
 
-    plt.scatter(k, scenarios_time)
-    plt.plot(k, scenarios_time)
+#     plt.scatter(k, scenarios_time)
+#     plt.plot(k, scenarios_time)
 
-    plt.legend(["Exact", "Scenarios"], loc='upper right')
+#     plt.legend(["Exact", "Scenarios"], loc='upper right')
 
-    plt.title('Time vs. k')
-    plt.xlabel('k')
-    plt.ylabel('Time')
-    plt.xticks(rotation=45, ha="right")
-    plt.yticks()
-    plt.grid()
+#     plt.title('Time vs. k')
+#     plt.xlabel('k')
+#     plt.ylabel('Time')
+#     plt.xticks(rotation=45, ha="right")
+#     plt.yticks()
+#     plt.grid()
 
-    #Feasibility of solution
-    # mu = exact_result[0]        #obj_val
-    # #sigma = exact_result[0]
-    # p_surplus = 1 - norm.cdf(v, mu, sigma)
+#     #Feasibility of solution
+#     # mu = exact_result[0]        #obj_val
+#     # #sigma = exact_result[0]
+#     # p_surplus = 1 - norm.cdf(v, mu, sigma)
 
 
-    plt.show()
+#     plt.show()
 
 
 if __name__ == "__main__":
